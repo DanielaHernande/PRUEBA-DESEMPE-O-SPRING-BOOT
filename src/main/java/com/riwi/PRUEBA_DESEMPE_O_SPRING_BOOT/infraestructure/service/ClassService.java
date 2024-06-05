@@ -11,6 +11,7 @@ import com.riwi.PRUEBA_DESEMPE_O_SPRING_BOOT.api.dto.response.ClassResponse;
 import com.riwi.PRUEBA_DESEMPE_O_SPRING_BOOT.domain.entities.ClassEntity;
 import com.riwi.PRUEBA_DESEMPE_O_SPRING_BOOT.domain.entities.Lesson;
 import com.riwi.PRUEBA_DESEMPE_O_SPRING_BOOT.domain.repositories.ClassRepository;
+import com.riwi.PRUEBA_DESEMPE_O_SPRING_BOOT.domain.repositories.LessonRepository;
 import com.riwi.PRUEBA_DESEMPE_O_SPRING_BOOT.infraestructure.abstract_service.IClassService;
 import com.riwi.PRUEBA_DESEMPE_O_SPRING_BOOT.utils.exceptions.BadRequestException;
 
@@ -24,6 +25,10 @@ public class ClassService implements IClassService{
     @Autowired
     private final ClassRepository classRepository;
 
+    @Autowired
+    private final LessonRepository lessonRepository;
+
+    // Crear
     @Override
     public ClassResponse create(ClassRequest request) {
 
@@ -39,12 +44,20 @@ public class ClassService implements IClassService{
         return this.entityToResponse(find(id));
     }
 
+    // ACtualizar
     @Override
     public ClassResponse update(ClassRequest request, Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+
+        ClassEntity classEntity = this.find(id);
+
+        classEntity.setName(request.getName());
+        classEntity.setDescription(request.getDescription());
+        classEntity.setActive(request.isActive());
+
+        return this.entityToResponse(this.classRepository.save(classEntity));
     }
 
+    // ELiminar
     @Override
     public void delete(Long id) {
         // TODO Auto-generated method stub
