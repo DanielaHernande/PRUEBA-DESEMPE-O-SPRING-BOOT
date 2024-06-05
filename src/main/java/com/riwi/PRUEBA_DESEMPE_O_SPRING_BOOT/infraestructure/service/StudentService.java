@@ -57,8 +57,18 @@ public class StudentService implements IStudentService{
     // Actualizar
     @Override
     public StudentResponse update(StudentRequest request, Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+
+        Student student = this.find(id);
+
+        ClassEntity classEntity = this.classRepository.findById(id)
+                .orElseThrow(() -> new BadRequestException("No hay una clase con ese id suministrado"));
+
+        student.setName(request.getName());
+        student.setEmail(request.getEmail());
+        student.setActive(request.isActive());
+        student.setClassId(classEntity);
+
+        return this.entityToResponse(this.studentRepository.save(student));
     }
 
     // Eliminar
