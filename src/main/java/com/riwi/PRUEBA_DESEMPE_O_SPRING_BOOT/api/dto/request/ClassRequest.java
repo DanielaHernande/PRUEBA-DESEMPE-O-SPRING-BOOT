@@ -32,6 +32,6 @@ public class ClassRequest {
     )
     private String description;
 
-    @NotBlank(message = "La activscion es requerida")
+    @NotNull(message = "La activscion es requerida")
     private boolean active;
 }
