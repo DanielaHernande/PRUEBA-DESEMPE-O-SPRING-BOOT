@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.riwi.PRUEBA_DESEMPE_O_SPRING_BOOT.api.dto.request.StudentRequest;
 import com.riwi.PRUEBA_DESEMPE_O_SPRING_BOOT.api.dto.response.StudentResponse;
-import com.riwi.PRUEBA_DESEMPE_O_SPRING_BOOT.domain.entities.Student;
 import com.riwi.PRUEBA_DESEMPE_O_SPRING_BOOT.infraestructure.abstract_service.IStudentService;
 
 import lombok.AllArgsConstructor;

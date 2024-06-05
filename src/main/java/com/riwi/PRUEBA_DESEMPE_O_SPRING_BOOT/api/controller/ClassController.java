@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.riwi.PRUEBA_DESEMPE_O_SPRING_BOOT.api.dto.request.ClassRequest;
 import com.riwi.PRUEBA_DESEMPE_O_SPRING_BOOT.api.dto.response.ClassResponse;
-import com.riwi.PRUEBA_DESEMPE_O_SPRING_BOOT.domain.entities.ClassEntity;
 import com.riwi.PRUEBA_DESEMPE_O_SPRING_BOOT.infraestructure.abstract_service.IClassService;
 
 import lombok.AllArgsConstructor;

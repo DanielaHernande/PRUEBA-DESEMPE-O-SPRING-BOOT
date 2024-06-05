@@ -6,10 +6,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import com.riwi.PRUEBA_DESEMPE_O_SPRING_BOOT.api.dto.request.ClassRequest;
 import com.riwi.PRUEBA_DESEMPE_O_SPRING_BOOT.api.dto.request.LessonRequest;
 import com.riwi.PRUEBA_DESEMPE_O_SPRING_BOOT.api.dto.response.ClassBasicResponse;
-import com.riwi.PRUEBA_DESEMPE_O_SPRING_BOOT.api.dto.response.ClassResponse;
 import com.riwi.PRUEBA_DESEMPE_O_SPRING_BOOT.api.dto.response.LessonResponse;
 import com.riwi.PRUEBA_DESEMPE_O_SPRING_BOOT.api.dto.response.MultimediaBasicResponse;
 import com.riwi.PRUEBA_DESEMPE_O_SPRING_BOOT.domain.entities.ClassEntity;
@@ -29,14 +27,23 @@ public class LessonService implements ILessonService{
     @Autowired
     private final LessonRepository lessonRepository;
 
+    // Class
     @Autowired
     private final ClassRepository classRepository;
     
     // Crear
     @Override
     public LessonResponse create(LessonRequest request) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'create'");
+
+        ClassEntity classEntity = this.classRepository.findById(request.getClassId())
+                    .orElseThrow(() -> new BadRequestException("No hay clses con ese id"));
+
+        Lesson lesson = this.requestToEntity(request);
+
+        lesson.setClassId(classEntity);
+
+        return this.entityToResponse(this.lessonRepository.save(lesson));
+
     }
 
     // Obtener solo uno
@@ -81,9 +88,6 @@ public class LessonService implements ILessonService{
         if (entity.getClassId() != null) {
             BeanUtils.copyProperties(entity.getClassId(), classEntity);
         }
-
-        MultimediaBasicResponse multimedia = new MultimediaBasicResponse();
-
 
         return LessonResponse.builder()
                 .id(entity.getId())

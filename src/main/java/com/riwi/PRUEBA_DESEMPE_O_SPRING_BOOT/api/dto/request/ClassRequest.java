@@ -1,8 +1,5 @@
 package com.riwi.PRUEBA_DESEMPE_O_SPRING_BOOT.api.dto.request;
 
-import java.time.LocalDateTime;
-
-import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
