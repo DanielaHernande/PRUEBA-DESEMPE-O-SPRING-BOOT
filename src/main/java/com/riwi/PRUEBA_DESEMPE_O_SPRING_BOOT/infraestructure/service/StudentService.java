@@ -26,6 +26,7 @@ public class StudentService implements IStudentService{
     @Autowired
     private final StudentRepository studentRepository;
 
+    // Repository de clase
     @Autowired
     private final ClassRepository classRepository;
 
@@ -65,8 +66,8 @@ public class StudentService implements IStudentService{
 
         student.setName(request.getName());
         student.setEmail(request.getEmail());
-        student.setActive(request.isActive());
         student.setClassId(classEntity);
+        student.setActive(request.isActive());
 
         return this.entityToResponse(this.studentRepository.save(student));
     }
@@ -74,8 +75,10 @@ public class StudentService implements IStudentService{
     // Eliminar
     @Override
     public void delete(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+
+        Student student = this.find(id);
+
+        this.studentRepository.delete(student);
     }
 
     // Obtener todo
