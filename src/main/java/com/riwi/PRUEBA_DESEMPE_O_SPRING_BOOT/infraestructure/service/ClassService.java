@@ -60,8 +60,8 @@ public class ClassService implements IClassService{
     // ELiminar
     @Override
     public void delete(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+
+        this.classRepository.delete(find(id));
     }
 
     // Obtener todo
