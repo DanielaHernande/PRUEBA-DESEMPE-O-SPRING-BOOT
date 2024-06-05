@@ -15,9 +15,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.riwi.PRUEBA_DESEMPE_O_SPRING_BOOT.api.dto.errors.BaseErrorResp;
 import com.riwi.PRUEBA_DESEMPE_O_SPRING_BOOT.api.dto.errors.ErrorsResp;
 
-
-
-
 /**
  * Controlador para manejar excepciones específicas y retornar respuestas adecuadas.
  * Marcado con @RestControllerAdvice para aplicar consejos globales a los controladores.

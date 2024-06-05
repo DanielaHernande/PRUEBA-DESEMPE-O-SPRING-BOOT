@@ -30,10 +30,11 @@ public class ClassService implements IClassService{
         throw new UnsupportedOperationException("Unimplemented method 'create'");
     }
 
+    // Obtener solo uno
     @Override
     public ClassResponse get(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'get'");
+
+        return this.entityToResponse(find(id));
     }
 
     @Override
