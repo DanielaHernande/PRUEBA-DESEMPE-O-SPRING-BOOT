@@ -38,8 +38,8 @@ public class StudentService implements IStudentService{
     // Obtener solo uno
     @Override
     public StudentResponse get(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'get'");
+
+        return this.entityToResponse(find(id));
     }
 
     // Actualizar
