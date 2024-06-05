@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.riwi.PRUEBA_DESEMPE_O_SPRING_BOOT.api.dto.request.StudentRequest;
 import com.riwi.PRUEBA_DESEMPE_O_SPRING_BOOT.api.dto.response.StudentResponse;
+
 import com.riwi.PRUEBA_DESEMPE_O_SPRING_BOOT.infraestructure.abstract_service.IStudentService;
 
 import lombok.AllArgsConstructor;
@@ -65,13 +66,13 @@ public class StudentController {
         return ResponseEntity.ok(this.studentService.update(request, id));
     }
 
-    // Actualizar
-    @PutMapping(path = "/{id}")
-    public ResponseEntity<StudentResponse> pash(
-            @Validated @RequestBody StudentRequest request,
+    // Delete
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<Void> delete(
             @PathVariable Long id
     ) {
 
-        return ResponseEntity.ok(this.studentService.update(request, id));
+        this.studentService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }
