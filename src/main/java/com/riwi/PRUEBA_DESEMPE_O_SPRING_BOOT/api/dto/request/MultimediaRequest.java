@@ -1,10 +1,7 @@
 package com.riwi.PRUEBA_DESEMPE_O_SPRING_BOOT.api.dto.request;
 
-import java.time.LocalDateTime;
-
 import com.riwi.PRUEBA_DESEMPE_O_SPRING_BOOT.utils.enums.Contenido;
 
-import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
