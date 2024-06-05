@@ -65,13 +65,13 @@ public class StudentController {
         return ResponseEntity.ok(this.studentService.update(request, id));
     }
 
-    // Delete
-    @DeleteMapping(path = "/{id}")
-    public ResponseEntity<Void> delete(
+    // Actualizar
+    @PutMapping(path = "/{id}")
+    public ResponseEntity<StudentResponse> pash(
+            @Validated @RequestBody StudentRequest request,
             @PathVariable Long id
     ) {
 
-        this.studentService.delete(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(this.studentService.update(request, id));
     }
 }

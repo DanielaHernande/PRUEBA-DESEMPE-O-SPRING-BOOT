@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -63,12 +64,13 @@ public class ClassController {
         return ResponseEntity.ok(this.classService.update(request, id));
     }
 
-    @DeleteMapping(path = "/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-
-        this.classService.delete(id);
-
-        return ResponseEntity.noContent().build();
+    @PatchMapping(path = "/{id}")
+    public ResponseEntity<ClassResponse> pacth(
+            @Validated @RequestBody ClassRequest request,
+            @PathVariable Long id
+    ) {
+        
+        return ResponseEntity.ok(this.classService.update(request, id));
     }
     
 }
