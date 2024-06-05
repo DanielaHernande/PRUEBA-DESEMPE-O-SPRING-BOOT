@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.riwi.PRUEBA_DESEMPE_O_SPRING_BOOT.api.dto.request.StudentRequest;
 import com.riwi.PRUEBA_DESEMPE_O_SPRING_BOOT.api.dto.response.ClassBasicResponse;
 import com.riwi.PRUEBA_DESEMPE_O_SPRING_BOOT.api.dto.response.StudentResponse;
+import com.riwi.PRUEBA_DESEMPE_O_SPRING_BOOT.domain.entities.ClassEntity;
 import com.riwi.PRUEBA_DESEMPE_O_SPRING_BOOT.domain.entities.Student;
 import com.riwi.PRUEBA_DESEMPE_O_SPRING_BOOT.domain.repositories.ClassRepository;
 import com.riwi.PRUEBA_DESEMPE_O_SPRING_BOOT.domain.repositories.StudentRepository;
@@ -31,8 +32,19 @@ public class StudentService implements IStudentService{
     // Crear
     @Override
     public StudentResponse create(StudentRequest request) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'create'");
+
+        // Buscar el curso por ID, lanzar excepción si no se encuentra
+        ClassEntity classEntity = this.classRepository.findById(request.getClassId())
+                    .orElseThrow(() -> new BadRequestException("No hay clses con ese id"));
+
+        // Convertir la solicitud a entidad student
+        Student student = this.requestToEntity(request);
+
+        // Asignar la calse a student
+        student.setClassId(classEntity);
+
+        // Guardar la lección en el repositorio y devolver la respuesta
+        return this.entityToResponse(this.studentRepository.save(student));
     }
 
     // Obtener solo uno
@@ -62,7 +74,7 @@ public class StudentService implements IStudentService{
 
         if (page < 0) page = 0;
 
-        PageRequest pagination = PageRequest.of(page, size);
+        PageRequest pagination = PageRequest.of(page - 1, size);
 
         return this.studentRepository.findAll(pagination)
                 .map(this::entityToResponse);
@@ -81,6 +93,8 @@ public class StudentService implements IStudentService{
         return StudentResponse.builder()
                 .id(entity.getId())
                 .name(entity.getName())
+                .email(entity.getEmail())
+                .createAt(entity.getCreateAt())
                 .classId(classEntity)
                 .active(entity.isActive())
                 .build();
